@@ -69,6 +69,104 @@ public class PersonBean {
 			ex.printStackTrace();
 		}
 		return p;
-		
 	}
+	
+	public void delete(){
+		try {
+			rowSet.moveToCurrentRow();
+			rowSet.deleteRow();
+		} catch (SQLException ex) {
+			try {
+				rowSet.rollback();
+			} catch (Exception e) {
+				ex.printStackTrace();
+			}
+		}
+	}
+	
+	public Person moveFirst(){	
+		Person p = new Person();
+		try {
+			rowSet.first();
+			p.setPersonId(rowSet.getInt("personId"));
+			p.setFirstName(rowSet.getString("firstName"));
+			p.setMiddleName(rowSet.getString("middleName"));
+			p.setLastName(rowSet.getString("lastName"));
+			p.setEmail(rowSet.getString("email"));
+			p.setPhone(rowSet.getString("phone"));
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		}
+		return p;
+	}
+	
+	public Person moveLast(){	
+		Person p = new Person();
+		try {
+			rowSet.last();
+			p.setPersonId(rowSet.getInt("personId"));
+			p.setFirstName(rowSet.getString("firstName"));
+			p.setMiddleName(rowSet.getString("middleName"));
+			p.setLastName(rowSet.getString("lastName"));
+			p.setEmail(rowSet.getString("email"));
+			p.setPhone(rowSet.getString("phone"));
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		}
+		return p;
+	}
+	
+	public Person moveNext(){	
+		Person p = new Person();
+		try {
+			if(rowSet.next() == false)
+				rowSet.previous();
+			p.setPersonId(rowSet.getInt("personId"));
+			p.setFirstName(rowSet.getString("firstName"));
+			p.setMiddleName(rowSet.getString("middleName"));
+			p.setLastName(rowSet.getString("lastName"));
+			p.setEmail(rowSet.getString("email"));
+			p.setPhone(rowSet.getString("phone"));
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		}
+		return p;
+	}
+	
+	public Person movePrevious(){	
+		Person p = new Person();
+		try {
+			if(rowSet.previous() == false)
+				rowSet.next();
+			p.setPersonId(rowSet.getInt("personId"));
+			p.setFirstName(rowSet.getString("firstName"));
+			p.setMiddleName(rowSet.getString("middleName"));
+			p.setLastName(rowSet.getString("lastName"));
+			p.setEmail(rowSet.getString("email"));
+			p.setPhone(rowSet.getString("phone"));
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		}
+		return p;
+	}
+	
+	public Person getCurrent(){	
+		Person p = new Person();
+		try {
+			rowSet.moveToCurrentRow();
+			p.setPersonId(rowSet.getInt("personId"));
+			p.setFirstName(rowSet.getString("firstName"));
+			p.setMiddleName(rowSet.getString("middleName"));
+			p.setLastName(rowSet.getString("lastName"));
+			p.setEmail(rowSet.getString("email"));
+			p.setPhone(rowSet.getString("phone"));
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		}
+		return p;
+	}
+	
+	
+	
+	
 }
